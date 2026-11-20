@@ -1,0 +1,7 @@
+bw_path	sample_id	genotype	mark	rep	center_reads	extend_reads	bin_size	min_mapq	normalization
+/path/to/bigwigs/sample1_H3K36me3.CPM.bw	sample1	yw	H3K36me3	1	false	false	1	0	CPM
+/path/to/bigwigs/sample2_H3K36me3.CPM.bw	sample2	yw	H3K36me3	2	false	false	1	0	CPM
+/path/to/bigwigs/sample3_H3K36me3.CPM.bw	sample3	yw	H3K36me3	3	false	false	1	0	CPM
+/path/to/bigwigs/sample4_H3K36me3.CPM.bw	sample4	mutant	H3K36me3	1	false	false	1	0	CPM
+/path/to/bigwigs/sample5_H3K27ac.CPM.bw	sample5	yw	H3K27ac	1	false	false	1	0	CPM
+/path/to/bigwigs/sample6_H3K27ac.CPM.bw	sample6	yw	H3K27ac	2	false	false	1	0	CPM

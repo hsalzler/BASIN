@@ -1,0 +1,97 @@
+BASIN PATCH VALIDATION REPORT
+Date: 2026-09-23
+Base package: BASIN_24August2026_final.zip
+
+SCOPE
+-----
+This report covers static and local regression validation of the 2026-09-23
+coverage-contract patch. It is not a substitute for an end-to-end Slurm run on
+real BAM/bigWig data.
+
+CHECKS PERFORMED
+----------------
+1. HARMONY Python syntax
+   - Command: python3 -m py_compile HARMONY/harmony.py
+   - Result: PASS
+
+2. All package shell/Slurm script syntax
+   - Command: bash -n on every *.sh and *.sbatch file
+   - Result: PASS
+
+3. OVERTURE Step-4 embedded Python syntax
+   - Extracted the Python heredoc from eval_panels.sbatch
+   - Command: python3 -m py_compile
+   - Result: PASS
+
+4. CODA embedded R structural sanity
+   - R/Rscript are not installed in this execution environment.
+   - Extracted the R heredoc and performed quote/comment-aware delimiter balance
+     checks for (), [], and {}.
+   - Result: PASS
+   - Limitation: this is not a true R parser/runtime test.
+
+5. HARMONY canonical command-generation regression
+   - Loaded both the original and patched harmony.py.
+   - Compared bamCoverage command arrays for the original safe defaults:
+       bin_size=1
+       min_mapq=0
+       center_reads=false
+       extend_reads=false
+     for NONE, CPM, and scaled-NONE output.
+   - Result: IDENTICAL commands / PASS
+
+6. HARMONY geometry separation unit tests
+   - Verified canonical output never includes --centerReads or --extendReads.
+   - Verified canonical binSize=1 and configured MAPQ are retained.
+   - Verified downstream centered output includes --centerReads only.
+   - Verified downstream extended output includes --extendReads and receives the
+     fragment-weighted filename tag.
+   - Result: PASS
+
+7. HARMONY scale-factor regression
+   - Ran original and patched compute_scales_per_sample on the same synthetic
+     BAR matrix at drops 0.10, 0.20, 0.35, and 0.50.
+   - Compared scale-table fields including N, retained N, median, scale factor,
+     and global all-zero-row count.
+   - Result: IDENTICAL / PASS
+
+8. HARMONY retained-BAR unit test
+   - Synthetic matrix included one globally all-zero BAR row.
+   - Verified the row was removed globally, round(N*d) trimming was applied, the
+     expected medians/scales were produced, and exact retained BAR rows were
+     written.
+   - Result: PASS
+
+9. OVERTURE validation-bigWig contract test
+   - Executed the extracted Step-4 Python with synthetic metadata.
+   - Verified center_reads=false / extend_reads=false / bin_size=1 / CPM metadata
+     passes the geometry gate and reaches the expected later missing-BED check.
+   - Verified center_reads=true is explicitly rejected.
+   - Result: PASS
+
+10. Documentation/code consistency scan
+   - Searched package text for obsolete global geometry controls, RPGC-as-CODA-
+     baseline language, stale bigWigAverageOverBed CODA claims, and floor-based
+     trimming in patched normalization/QC paths.
+   - Remaining mentions are intentional migration/error text, OVERTURE's actual
+     bigWigAverageOverBed dependency, or unrelated percentile code.
+   - Result: PASS after cleanup
+
+NOT RUN HERE
+------------
+- Full HARMONY execution with real BAMs and installed deepTools/samtools.
+- Full OVERTURE evaluation with real bigWigs and UCSC bigWigAverageOverBed.
+- Full CODA R execution with the required R/tidyverse environment.
+- Slurm submission/runtime behavior on UNC Longleaf.
+
+RECOMMENDED RELEASE-GATE TEST
+-----------------------------
+Before public beta release, run one previously successful HARMONY dataset through
+both the old and patched package with canonical settings. Confirm:
+- canonical NONE and CPM bigWigs are byte-identical or numerically identical;
+- scales_long.tsv is identical;
+- canonical BASIN bigWigs are byte-identical or numerically identical;
+- patched CODA completes and expected changes are limited to corrected retained-
+  BAR/drop-stability/QC bookkeeping;
+- optional centered derivative tracks are produced only under
+  bigwigs_downstream/ and are never discovered by CODA.
