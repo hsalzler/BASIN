@@ -1,0 +1,19 @@
+sample_id	bam_path	antibody	genotype	sex	replicate
+# Replace the example rows below with your actual sample information.
+# sample_id:  A unique identifier for each sample. Used in output filenames
+#             and QC summaries. No spaces; underscores recommended.
+# bam_path:   Absolute path to the aligned BAM file for this sample.
+#             BAM files should be aligned to your reference genome and sorted.
+#             Duplicate marking is handled by HARMONY if not already done.
+# antibody:   The antibody used (e.g., H3K27me3, H3K4me3, IgG).
+# genotype:   Genotype or condition label (e.g., wildtype, mutant).
+# sex:        Sex of the sample if applicable (e.g., Male, Female, Mixed, NA).
+# replicate:  Replicate number or identifier (e.g., 1, 2, 3).
+#
+# Example rows (replace with your real paths and metadata):
+sample1_WT_rep1	/path/to/bams/sample1_WT_rep1.bam	H3K27me3	wildtype	Mixed	1
+sample2_WT_rep2	/path/to/bams/sample2_WT_rep2.bam	H3K27me3	wildtype	Mixed	2
+sample3_WT_rep3	/path/to/bams/sample3_WT_rep3.bam	H3K27me3	wildtype	Mixed	3
+sample4_mut_rep1	/path/to/bams/sample4_mut_rep1.bam	H3K27me3	mutant	Mixed	1
+sample5_mut_rep2	/path/to/bams/sample5_mut_rep2.bam	H3K27me3	mutant	Mixed	2
+sample6_mut_rep3	/path/to/bams/sample6_mut_rep3.bam	H3K27me3	mutant	Mixed	3
