@@ -1,4 +1,0 @@
-sample_id	source	layout	bam	genome_id
-SAMPLE_IGG_rep1	BAM	PE	/path/to/your/bams/sample_igg_rep1.sorted.bam	dm6
-SAMPLE_IGG_rep2	BAM	PE	/path/to/your/bams/sample_igg_rep2.sorted.bam	dm6
-SAMPLE_IGG_rep3	BAM	PE	/path/to/your/bams/sample_igg_rep3.sorted.bam	dm6
