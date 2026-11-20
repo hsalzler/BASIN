@@ -13,12 +13,15 @@ regions of consistent nonspecific IgG enrichment called BASIN Anchor Regions
 (BARs). It can be used either as a replacement for spike-ins, or as an 
 orthogonal method that is compatible with spike-ins. 
 
-The key biological insight is that stronger antibody enrichment reduces
-nonspecific IgG binding — so IgG signal is inversely related to true signal
-strength, and can be used as a normalization reference without adding any
-exogenous material. BASIN requires no spike-in, no additional library
-preparation, and no paired IgG control beyond what is standard for CUT&RUN and
-CUT&TAG experiments.
+The central insight behind BASIN is that recurrent, peak-like regions of nonspecific 
+enrichment identified across IgG controls behave as endogenous read sinks. As 
+antibody-specific enrichment increases, a smaller proportion of sequencing reads is 
+allocated to these background regions; conversely, when specific enrichment declines, 
+their relative representation increases. BASIN exploits this compositional relationship 
+to derive normalization factors from an empirically defined background compartment, 
+without assuming that individual reference regions are invariant. The method requires 
+no exogenous spike-in material or additional library preparation and uses IgG datasets 
+to define a reusable normalization reference.
 
 ---
 
