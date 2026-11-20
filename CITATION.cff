@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use BASIN in your research, please cite this software and its associated publication when available."
+type: software
+authors:
+  - family-names: Salzler
+    given-names: Harmony
+title: "BASIN: Background-Anchored Signal Normalization with Integrated Quality Control for CUT&RUN and CUT&Tag"
+license: MIT
